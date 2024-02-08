@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/tokend/sandwich-bot/internal/cli"
+	"sandwich-bot/internal/cli"
 )
 
 func main() {

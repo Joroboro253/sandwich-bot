@@ -36,8 +36,3 @@ jobs:
         run: |
           . $(werf ci-env github --as-file)
           werf export service --tag ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
-
-permissions:
-  contents: write
-  packages: write
-  id-token: write

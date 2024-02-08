@@ -1,8 +1,9 @@
 package service
 
 import (
-	"github.com/tokend/sandwich-bot/internal/config"
 	"gitlab.com/distributed_lab/logan/v3"
+
+	"sandwich-bot/internal/config"
 )
 
 type service struct {

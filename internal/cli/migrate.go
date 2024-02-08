@@ -1,9 +1,10 @@
 package cli
 
 import (
+	"sandwich-bot/internal/assets"
+	"sandwich-bot/internal/config"
+
 	migrate "github.com/rubenv/sql-migrate"
-	"github.com/tokend/sandwich-bot/internal/assets"
-	"github.com/tokend/sandwich-bot/internal/config"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 )
 

@@ -2,12 +2,12 @@
 
 ## Description
 
-A sandwich bot for Uniswap v2 monitors the Ethereum transaction pool (tx pool) to detect swap transactions.
+A sandwich bot for Uniswap v2 monitors the Ethereum transaction pool to detect swap transactions, including those routed through aggregators
 
 ## Install
 
   ```
-  git clone github.com/tokend/sandwich-bot
+  git clone sandwich-bot
   cd sandwich-bot
   go build main.go
   export KV_VIPER_FILE=./config.yaml
@@ -40,8 +40,8 @@ Make sure that docker installed.
 
 
   ```
-  docker build -t github.com/tokend/sandwich-bot .
-  docker run -e KV_VIPER_FILE=/config.yaml github.com/tokend/sandwich-bot
+  docker build -t sandwich-bot .
+  docker run -e KV_VIPER_FILE=/config.yaml sandwich-bot
   ```
 
 ## Running from Source

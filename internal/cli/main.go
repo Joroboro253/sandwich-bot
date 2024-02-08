@@ -1,9 +1,10 @@
 package cli
 
 import (
+	"sandwich-bot/internal/config"
+	"sandwich-bot/internal/service"
+
 	"github.com/alecthomas/kingpin"
-	"github.com/tokend/sandwich-bot/internal/config"
-	"github.com/tokend/sandwich-bot/internal/service"
 	"gitlab.com/distributed_lab/kit/kv"
 	"gitlab.com/distributed_lab/logan/v3"
 )

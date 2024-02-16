@@ -3,4 +3,6 @@ log:
   disable_sentry: true
 
 db:
-  url: db_url
+  url: postgres://postgres:bestuser@localhost:5432/sandwichBot
+#
+# postgresql://localhost:5432/sandwichBot

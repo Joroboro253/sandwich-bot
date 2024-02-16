@@ -1,18 +1,17 @@
 package service
 
 import (
+	"fmt"
+	"github.com/ethereum/go-ethereum/ethclient"
 	"gitlab.com/distributed_lab/logan/v3"
+	"log"
 
 	"sandwich-bot/internal/config"
 )
 
 type service struct {
-	log *logan.Entry
-}
-
-func (s *service) run() error {
-	s.log.Info("Service started")
-	return nil
+	log       *logan.Entry
+	ethClient *ethclient.Client
 }
 
 func newService(cfg config.Config) *service {
@@ -25,4 +24,18 @@ func Run(cfg config.Config) {
 	if err := newService(cfg).run(); err != nil {
 		panic(err)
 	}
+}
+
+func (s *service) run() error {
+	s.log.Info("Service started")
+	client, err := ethclient.Dial("wss://goerli.infura.io/ws/v3/76256d7863c8480ba65718f2c4faabf7")
+	if err != nil {
+		log.Fatalf("Failed to connect to the Ethereum client: %v", err)
+		return err
+	}
+	fmt.Println("We are connected to the Goerli testnet!")
+	SubscribeToUniswapEvents(client)
+
+	return nil
+
 }

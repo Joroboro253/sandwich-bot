@@ -12,14 +12,11 @@ import (
 
 func SubscribeToUniswapEvents(client *ethclient.Client, uniswapV2Address common.Address) {
 	fmt.Println(uniswapV2Address)
-	//swapSignature := []byte("Swap(address,uint256,uint256,uint256,uint256,address)")
-	//swapSigHash := crypto.Keccak256Hash(swapSignature)
 
 	// Подписка на логи событий
 	logs := make(chan types.Log)
 	sub, err := client.SubscribeFilterLogs(context.Background(), ethereum.FilterQuery{
 		Addresses: []common.Address{uniswapV2Address},
-		//Topics:    [][]common.Hash{{swapSigHash}},
 	}, logs)
 	if err != nil {
 		log.Fatalf("Failed to subscribe to logs: %v", err)

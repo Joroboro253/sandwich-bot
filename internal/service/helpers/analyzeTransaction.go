@@ -16,7 +16,7 @@ func analyzeTransaction(txHash common.Hash, client *ethclient.Client) {
 	// Получение данных транзакции по хешу
 	tx, isPending, err := client.TransactionByHash(context.Background(), txHash)
 	if err != nil {
-		log.Printf("Error getting transaction: %v\n", err)
+		//log.Printf("Error getting transaction: %v\n", err)
 		return
 	}
 	if !isPending {
@@ -40,18 +40,15 @@ func analyzeTransaction(txHash common.Hash, client *ethclient.Client) {
 			log.Printf("Error identifying method: %v\n", err)
 			return
 		}
-		// TODO: Здесь нужнно сделать вывод адреса, чтобы проверить что метод действительно uniswap
-		fmt.Printf("Method called in transaction: %s\n", method.Name)
+
+		//fmt.Printf("Method called in transaction: %s\n", method.Name)
 		if method.Name == "swapExactTokensForTokens" ||
 			method.Name == "swapTokensForExactTokens" ||
 			method.Name == "swapExactETHForTokens" ||
 			method.Name == "swapTokensForExactETH" ||
 			method.Name == "swapExactTokensForETH" ||
 			method.Name == "swapETHForExactTokens" {
-			fmt.Println("This transaction is a Uniswap V2 swap transaction.")
-			fmt.Println("New pending transaction:", txHash.Hex()) // here can be additional logic for analyze arguments of method
-		} else {
-			fmt.Println("This transaction is not a Uniswap V2 swap transaction.")
+			fmt.Println("New Uniswap V2 transaction:", txHash.Hex()) // here can be additional logic for analyze arguments of method
 		}
 	}
 

@@ -29,14 +29,17 @@ func Run(cfg config.Config) {
 
 func (s *service) run() error {
 	s.log.Info("Service started")
-	ethClient, err := ethclient.Dial("wss://goerli.infura.io/ws/v3/76256d7863c8480ba65718f2c4faabf7")
-	if err != nil {
-		log.Fatalf("Failed to connect to the Ethereum client: %v", err)
-	}
+	//ethClient, err := ethclient.Dial("wss://goerli.infura.io/ws/v3/76256d7863c8480ba65718f2c4faabf7")
+	//if err != nil {
+	//	log.Fatalf("Failed to connect to the Ethereum client: %v", err)
+	//}
 	rpcClient, err := rpc.Dial("wss://goerli.infura.io/ws/v3/76256d7863c8480ba65718f2c4faabf7")
 	if err != nil {
 		log.Fatalf("Failed to connect to the Ethereum client: %v", err)
 	}
+
+	ethClient := ethclient.NewClient(rpcClient)
+
 	fmt.Println("We are connected to the Goerli testnet!")
 
 	//contractAddress := common.HexToAddress("0xe592427a0aece92de3edee1f18e0157c05861564")

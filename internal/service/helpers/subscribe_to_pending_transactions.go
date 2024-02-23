@@ -12,6 +12,7 @@ import (
 func SubscribeToPendingTransactions(rpcClient *rpc.Client, ethClient *ethclient.Client) {
 	ch := make(chan common.Hash)
 	sub, err := rpcClient.EthSubscribe(context.Background(), ch, "newPendingTransactions")
+
 	if err != nil {
 		log.Fatalf("Failed to subscribe to new pending transactions: %v", err)
 	}

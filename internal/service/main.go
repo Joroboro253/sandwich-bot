@@ -8,16 +8,27 @@ import (
 	"log"
 	"sandwich-bot/internal/config"
 	"sandwich-bot/internal/service/helpers"
+	"time"
 )
 
 type service struct {
 	log       *logan.Entry
 	ethClient *ethclient.Client
+	rpcClient *rpc.Client
 }
 
 func newService(cfg config.Config) *service {
+	rpcClient, err := rpc.Dial("wss://goerli.infura.io/ws/v3/76256d7863c8480ba65718f2c4faabf7")
+	if err != nil {
+		log.Fatalf("Failed to connect to the Ethereum client: %v", err)
+	}
+
+	ethClient := ethclient.NewClient(rpcClient)
+
 	return &service{
-		log: cfg.Log(),
+		log:       cfg.Log(),
+		ethClient: ethClient,
+		rpcClient: rpcClient,
 	}
 }
 
@@ -29,24 +40,21 @@ func Run(cfg config.Config) {
 
 func (s *service) run() error {
 	s.log.Info("Service started")
-	//ethClient, err := ethclient.Dial("wss://goerli.infura.io/ws/v3/76256d7863c8480ba65718f2c4faabf7")
-	//if err != nil {
-	//	log.Fatalf("Failed to connect to the Ethereum client: %v", err)
-	//}
-	rpcClient, err := rpc.Dial("wss://goerli.infura.io/ws/v3/76256d7863c8480ba65718f2c4faabf7")
-	if err != nil {
-		log.Fatalf("Failed to connect to the Ethereum client: %v", err)
-	}
 
-	ethClient := ethclient.NewClient(rpcClient)
-
-	fmt.Println("We are connected to the Goerli testnet!")
-
-	//contractAddress := common.HexToAddress("0xe592427a0aece92de3edee1f18e0157c05861564")
-
-	fmt.Println("Subscribing to Uniswap events...")
-	helpers.SubscribeToPendingTransactions(rpcClient, ethClient)
-
+	s.subscribeToUniswapEvents()
 	return nil
+
+}
+
+func (s *service) subscribeToUniswapEvents() {
+	fmt.Println("Subscribing to Uniswap events...")
+	for {
+		if err := helpers.SubscribeToPendingTransactions(s.rpcClient, s.ethClient); err != nil {
+			log.Printf("Subscription failed with error: %v. Re-subscribing in 10 seconds...", err)
+			time.Sleep(10 * time.Second)
+			continue
+		}
+		break
+	}
 
 }

@@ -24,7 +24,7 @@ func SubscribeToPendingTransactions(rpcClient *rpc.Client, ethClient *ethclient.
 			log.Fatalf("Subscription error: %v", err)
 			return err
 		case txHash := <-ch:
-			analyzeTransaction(txHash, ethClient)
+			go analyzeTransaction(txHash, ethClient)
 		}
 	}
 }

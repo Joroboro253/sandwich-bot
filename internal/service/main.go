@@ -24,6 +24,7 @@ func newService(cfg config.Config) *service {
 	}
 
 	ethClient := ethclient.NewClient(rpcClient)
+	//ethClient, err := ethclient.Dial("wss://goerli.infura.io/ws/v3/76256d7863c8480ba65718f2c4faabf7")
 
 	return &service{
 		log:       cfg.Log(),

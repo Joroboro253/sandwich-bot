@@ -1,11 +1,10 @@
 package cli
 
 import (
-	"sandwich-bot/internal/assets"
-	"sandwich-bot/internal/config"
-
 	migrate "github.com/rubenv/sql-migrate"
 	"gitlab.com/distributed_lab/logan/v3/errors"
+	"sandwich-bot/internal/assets"
+	"sandwich-bot/internal/config"
 )
 
 var migrations = &migrate.EmbedFileSystemMigrationSource{

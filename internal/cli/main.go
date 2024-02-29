@@ -1,12 +1,11 @@
 package cli
 
 import (
-	"sandwich-bot/internal/config"
-	"sandwich-bot/internal/service"
-
 	"github.com/alecthomas/kingpin"
 	"gitlab.com/distributed_lab/kit/kv"
 	"gitlab.com/distributed_lab/logan/v3"
+	"sandwich-bot/internal/config"
+	"sandwich-bot/internal/service"
 )
 
 func Run(args []string) bool {

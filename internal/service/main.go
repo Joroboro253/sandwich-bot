@@ -8,7 +8,6 @@ import (
 	"log"
 	"sandwich-bot/internal/config"
 	"sandwich-bot/internal/service/helpers"
-	"time"
 )
 
 type service struct {
@@ -24,7 +23,6 @@ func newService(cfg config.Config) *service {
 	}
 
 	ethClient := ethclient.NewClient(rpcClient)
-	//ethClient, err := ethclient.Dial("wss://goerli.infura.io/ws/v3/76256d7863c8480ba65718f2c4faabf7")
 
 	return &service{
 		log:       cfg.Log(),
@@ -49,13 +47,6 @@ func (s *service) run() error {
 
 func (s *service) subscribeToUniswapEvents() {
 	fmt.Println("Subscribing to Uniswap events...")
-	for {
-		if err := helpers.SubscribeToPendingTransactions(s.rpcClient, s.ethClient); err != nil {
-			log.Printf("Subscription failed with error: %v. Re-subscribing in 10 seconds...", err)
-			time.Sleep(10 * time.Second)
-			continue
-		}
-		break
-	}
+	helpers.RunSandwichStrategy(s.rpcClient, s.ethClient)
 
 }

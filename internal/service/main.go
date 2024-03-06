@@ -17,7 +17,7 @@ type service struct {
 }
 
 func newService(cfg config.Config) *service {
-	rpcClient, err := rpc.Dial("wss://eth-mainnet.g.alchemy.com/v2/2zbWEnbUayojJSQHp0MuM07Cl0pY1x63")
+	rpcClient, err := rpc.Dial("wss://eth-sepolia.g.alchemy.com/v2/GMc_7CxOjt0sP4kKLhwsBCgUX5e66e-b")
 	if err != nil {
 		log.Fatalf("Failed to connect to the Ethereum client: %v", err)
 	}

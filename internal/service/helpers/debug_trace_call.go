@@ -6,23 +6,6 @@ import (
 	"github.com/ethereum/go-ethereum/rpc"
 )
 
-type SwapDirection string
-
-const (
-	Buy  SwapDirection = "buy"
-	Sell SwapDirection = "sell"
-)
-
-type SwapInfo struct {
-	TxHash       common.Hash
-	TargetPair   common.Address
-	MainCurrency common.Address
-	TargetToken  common.Address
-	Version      uint8
-	Token0IsMain bool
-	Direction    SwapDirection
-}
-
 type CallFrame struct {
 	Type  string         `json:"type"`
 	From  common.Address `json:"from"`

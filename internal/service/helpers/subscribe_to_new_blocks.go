@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-// Подписка на новые блоки и отправка их в канал
+// Subscribe to new blocks and send them to the channel
 func subscribeToNewBlocks(client *ethclient.Client, blockCh chan<- *NewBlock) {
 	headers := make(chan *types.Header)
 	sub, err := client.SubscribeNewHead(context.Background(), headers)

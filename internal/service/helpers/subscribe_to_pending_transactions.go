@@ -9,7 +9,7 @@ import (
 	"log"
 )
 
-// Подписка на ожидающие транзакции и отправка их в канал
+// Subscribe to pending transactions and send them to the channel
 func subscribeToPendingTransactions(rpcClient *rpc.Client, ethClient *ethclient.Client, txCh chan<- *types.Transaction) {
 	ch := make(chan common.Hash)
 
